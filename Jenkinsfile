@@ -18,10 +18,10 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/mukeshr-29/netflix-project-11.git'
             }
         }
-        stage("Sonarqube Analysis "){
+        stage("Sonarqube Analysis"){
             steps{
                 withSonarQubeEnv(credentialsId: 'sonarqube') {
-                    sh ''' $SCANNER_HOME/bin/sonar -Dsonar.projectName=netflix-project \
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=netflix-project \
                     -Dsonar.projectKey=netflix-project  '''
                 }
             }
