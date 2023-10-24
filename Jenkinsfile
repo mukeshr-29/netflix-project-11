@@ -62,7 +62,7 @@ pipeline{
                         "URL: ${env.BUILD_URL}<br/>",
                     to: 'rmukeshh29@gmail.com',
                     attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
-                
+                }
             }
         }
         stage("docker build and push"){
@@ -82,6 +82,6 @@ pipeline{
             }
         }
     }
-}
+
 
 
