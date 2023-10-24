@@ -21,9 +21,11 @@ pipeline{
         stage("Sonarqube Analysis"){
             steps{
                 withSonarQubeEnv(credentialsId: 'sonarqube') {
-                    def scannerHome = tool 'sonar'
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=netflix-project \
-                    -Dsonar.projectKey=netflix-project  '''
+                    script{
+                        def scannerHome = tool 'sonar'
+                        sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=netflix-project \
+                        -Dsonar.projectKey=netflix-project  '''
+                    }
                 }
             }
         }
