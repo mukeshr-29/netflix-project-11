@@ -20,9 +20,8 @@ pipeline{
         }
         stage("Sonarqube Analysis"){
             steps{
-                withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonar') {
-                    script{
-                        def scannerHome = tool 'sonar'
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonar') {
                         sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=netflix-project \
                         -Dsonar.projectKey=netflix-project  '''
                     }
