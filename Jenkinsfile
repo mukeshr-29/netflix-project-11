@@ -65,6 +65,22 @@ pipeline{
                 
             }
         }
+        stage("docker build and push"){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker'){
+                        sh "docker build --build-arg TMDB_V3_API_KEY=0fca49232455b7eb9992e977753c7b14 -t netflix-project ."
+                        sh "docker tag netflix-project mukeshr29/netflix-project:latest"
+                        sh "docker push mukeshr29/netflix-project:latest"
+                    }
+                }
+            }
+        }
+        stage("trivy-scan"){
+            steps{
+                sh "trivy image mukeshr29/netflix-project:latest > trivy.txt"
+            }
+        }
     }
 }
 
